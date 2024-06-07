@@ -1,26 +1,18 @@
 const router = require("express").Router();
 const axios = require("axios");
 const withAuth = require("../utils/auth");
-const User = require("../models/User");
 
-// GET all events near the user's geopoint from Ticketmaster Discovery API
-router.get("/", withAuth, async (req, res) => {
+// GET all events in Salt Lake City from Ticketmaster Discovery API
+router.get("/", async (req, res) => {
   try {
-    const userId = req.session.userId;
-    const user = await User.findByPk(userId);
-
-    if (!user.latitude || !user.longitude) {
-      // Handle the case when the user's geopoint is not available
-      return res.status(400).json({ error: "User geopoint not available" });
-    }
-
     const response = await axios.get(
       "https://app.ticketmaster.com/discovery/v2/events.json",
       {
         params: {
           apikey: "AVDgVcvKelwg39PSEXIBgvRlF45Qv88g",
-          latlong: `${user.latitude},${user.longitude}`,
-          radius: "20",
+          city: "Salt Lake City",
+          stateCode: "UT",
+          radius: "10",
           unit: "miles",
           sort: "date,asc",
         },
@@ -40,24 +32,6 @@ router.get("/", withAuth, async (req, res) => {
       events,
       loggedIn: req.session.loggedIn,
     });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-router.post("/save-event", async (req, res) => {
-  try {
-    const { eventId } = req.body;
-    const userId = req.session.userId;
-
-    // Save the event with the associated user ID
-    await Event.create({
-      id: eventId,
-      userId: userId,
-    });
-
-    res.sendStatus(200);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
