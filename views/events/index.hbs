@@ -1,0 +1,10 @@
+<h1>Events</h1>
+{{#each events}}
+  <div class="event">
+    <h2>{{name.text}}</h2>
+    <p>Date: {{start.local}}</p>
+    <form action="/events/save/{{id}}" method="POST">
+      <button type="submit">Save Event</button>
+    </form>
+  </div>
+{{/each}}

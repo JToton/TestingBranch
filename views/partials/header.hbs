@@ -1,0 +1,15 @@
+<header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/events">Events</a></li>
+      {{#if user}}
+        <li><a href="/saved-events">Saved Events</a></li>
+        <li>Welcome, {{user.username}}</li>
+      {{else}}
+        <li><a href="/signup">Signup</a></li>
+        <li><a href="/login">Login</a></li>
+      {{/if}}
+    </ul>
+  </nav>
+</header>
