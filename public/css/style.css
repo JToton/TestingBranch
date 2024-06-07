@@ -6,8 +6,11 @@
   --light: #e3e4e3;
   --dark: #182c23;
   --match: #181914;
-  --gold: #d48803;
+  --gold: #eccf05;
   --cyan: #39b1ab;
+  --blue: #7181b7;
+  --brown: #99784e;
+  --lightGreen: #8c9d50;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
 }
@@ -20,11 +23,6 @@ body {
   min-height: 100vh;
   justify-content: flex-start;
   background: var(--light);
-}
-
-a {
-  color: var(--gold);
-  text-decoration: none;
 }
 
 a:visited {
@@ -45,7 +43,17 @@ footer {
   padding: 40px;
   text-align: center;
   background: var(--light);
-  color: var(--gold);
+}
+
+footer a {
+  display: inline-block; /* Make the links display as blocks */
+  margin-right: 10px; /* Add margin between the links */
+  text-decoration: none; /* Remove underline from links */
+  color: #333; /* Change link color */
+}
+
+footer a:hover {
+  text-decoration: underline; /* Underline links on hover */
 }
 
 main {
@@ -69,18 +77,15 @@ nav h1 {
   margin: 0;
 }
 
-nav .nav-buttons {
-  display: flex;
-  align-items: center;
-}
-
+nav .nav-buttons,
 nav .search-bar {
-  display: flex;
+  /*display: flex;*/
   align-items: center;
 }
 
 nav .search-bar input {
   padding: 10px;
+  padding-right: 10px;
   border: 1px solid var(--cyan);
   border-radius: var(--border-radius);
   outline: none;
@@ -98,7 +103,6 @@ nav .search-bar input:focus {
 
 nav a,
 .btn-no-style {
-  color: var(--gold);
   padding: 14px 20px;
   text-decoration: none;
   text-align: center;
@@ -113,15 +117,20 @@ nav a:hover,
 }
 
 .logout-btn {
-  background: none;
+  color: black;
+  padding: 14px 20px;
+  text-decoration: none;
+  text-align: center;
+  background-color: transparent;
   border: none;
   cursor: pointer;
+  transition: color 0.1s, background-color 0.1s;
 }
 
 .logout-btn:hover {
-  color: var(--secondary);
-  background-color: var(--dark);
-  text-decoration: underline;
+  color: var(--light);
+  background-color: var(--cyan);
+  text-decoration: none;
 }
 
 .genre .genre-btn {
@@ -134,16 +143,6 @@ h1 {
 }
 
 .events {
-  flex: 4;
-  background-color: #fff;
-  padding: 50px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.gallery {
   flex: 4;
   background-color: #fff;
   padding: 50px;
@@ -171,7 +170,7 @@ h1 {
 
 .logout-btn:hover {
   color: var (--secondary);
-  background-color: var(--dark);
+  background-color: var(--cyan);
   text-decoration: underline;
 }
 
@@ -204,19 +203,6 @@ img {
   height: auto;
 }
 
-.painting {
-  width: 50%;
-  background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 25px;
-}
-
-.painting-details {
-  text-align: center;
-  padding: 10px 20px;
-  font-weight: bold;
-}
-
 /* CARDS */
 .card {
   margin: 20px;
@@ -242,7 +228,7 @@ img {
   border-radius: var(--border-radius);
   border-style: double;
   border-width: thick;
-  background-color: #577a7c;
+  background-color: var(--blue);
   color: var(--light);
 }
 
@@ -294,17 +280,6 @@ img {
   font-weight: bold;
 }
 
-.gallery-name {
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-shadow: 2px 2px 5px var(--secondary);
-  border: 10px groove var(--light);
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-right: 100px;
-  padding-left: 100px;
-}
-
 /* LAYOUT */
 .container {
   max-width: 100%;
@@ -348,5 +323,5 @@ img {
 }
 
 .event-item a:hover {
-  background-color: var(--tertiary);
+  background-color: var(--lightGreen);
 }

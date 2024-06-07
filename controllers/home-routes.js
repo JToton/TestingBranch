@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const axios = require("axios");
 const withAuth = require("../utils/auth");
+const User = require("../models/User");
+const Event = require("../models/events");
 
 // GET all events in Salt Lake City from Ticketmaster Discovery API
 router.get("/", async (req, res) => {
@@ -12,7 +14,7 @@ router.get("/", async (req, res) => {
           apikey: "AVDgVcvKelwg39PSEXIBgvRlF45Qv88g",
           city: "Salt Lake City",
           stateCode: "UT",
-          radius: "10",
+          radius: "20",
           unit: "miles",
           sort: "date,asc",
         },
@@ -35,6 +37,47 @@ router.get("/", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
+  }
+});
+
+router.post("/save-event", withAuth, async (req, res) => {
+  try {
+    const {
+      eventId,
+      eventName,
+      eventStartDate,
+      eventStartTime,
+      eventUrl,
+      eventVenue,
+    } = req.body;
+    const userId = req.session.userId;
+
+    console.log("User ID:", userId);
+
+    // Check if the event is already saved by the user
+    const existingEvent = await Event.findOne({
+      where: { id: eventId, userId: userId },
+    });
+
+    if (existingEvent) {
+      return res.status(400).json({ message: "Event already saved" });
+    }
+
+    // Save the event with the associated user ID and all required fields
+    await Event.create({
+      id: eventId,
+      name: eventName,
+      startDate: eventStartDate,
+      startTime: eventStartTime,
+      url: eventUrl,
+      venue: eventVenue,
+      userId: userId,
+    });
+
+    res.status(200).json({ message: "Event saved successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 

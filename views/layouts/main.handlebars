@@ -13,10 +13,10 @@
       <h1>Eventopia</h1>
       <div class="nav-buttons">
         <input type="text" id="city-search" placeholder="search a city" />
-        <a href="/">Local Events</a>
-        <a href="/events">Saved Events</a>
+        <a href="/">Salt Lake City Events</a>
+        <a href="/saved-events">Saved Events</a>
         {{#if loggedIn}}
-          <button id="logout" class="btn-no-style logout-btn">Logout</button>
+          <button id="logout" class="logout-btn">Logout</button>
         {{else}}
           <a href="/login">Login</a>
         {{/if}}
@@ -46,8 +46,15 @@
       <script src="/js/logout.js"></script>
     {{/if}}
     <footer>
-      <h1>Project Two footer</h1>
+      <p>&copy; 2024 Eventopia. All rights reserved.</p>
+      <div>
+        <a href="https://github.com/creator1">Creator 1</a>
+        <a href="https://github.com/creator2">Creator 2</a>
+        <a href="https://github.com/creator3">Creator 3</a>
+        <a href="https://github.com/creator4">Creator 4</a>
+      </div>
     </footer>
-  </body>
 
+  </body>
+  <script src="/js/saveEvent.js"></script>
 </html>

@@ -1,6 +1,7 @@
 document.querySelectorAll(".save-event").forEach((button) => {
   button.addEventListener("click", async (event) => {
     const eventId = event.target.dataset.id;
+    console.log("Event ID:", eventId); // Add this line
 
     try {
       const response = await fetch("/save-event", {
